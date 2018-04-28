@@ -7,6 +7,7 @@ function saveNumOfPlayers(e){
   for(var i = 0; i < numOfPlayers; i++){
     let playerCard = document.createElement("div")
     playerCard.setAttribute("id", i + 1)
+    playerCard.setAttribute("class", "player-card")
     let player = document.createElement("h1")
     player.innerText = `Player ${i + 1}`
     playerCard.appendChild(player)
@@ -21,7 +22,10 @@ function createFrameCards(div){
     frameCard.setAttribute("class", `${j +1} frame-card`)
     let frameLabel = document.createElement("h2")
     frameLabel.innerText = `Frame ${j + 1}`
+    let frameScore = document.createElement("p")
+    frameScore.setAttribute("class", "frame-score")
     frameCard.appendChild(frameLabel)
+    frameCard.appendChild(frameScore)
     div.appendChild(frameCard)
   }
 }

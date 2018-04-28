@@ -1,0 +1,12 @@
+.player-card {
+    display: flex;
+}
+
+.frame-card {
+    padding: 2vmin;
+    height: 8vh;
+}
+
+.frame-card h2 {
+    font-size: 1rem;
+}
