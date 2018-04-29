@@ -4,7 +4,7 @@
 
 .frame-card {
     padding: 2vmin;
-    height: 8vh;
+    height:10vh;
 }
 
 .frame-card h2 {
@@ -13,4 +13,12 @@
 
 .hidden {
     display: none;
+}
+
+.frame-score-div {
+    display: flex;
+}
+
+.frame-score-1 {
+    padding-right: 2vmin;
 }
