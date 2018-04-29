@@ -11,6 +11,14 @@
         <input type="number" min="1" max="10" id="player-num">
         <input type="submit" name="submit" id="submit-player-num">
     </form>
+    <div class="hidden score-form">
+        <button class="new-game">New Game</button>
+        <form action="/#" id="score-input-form">
+            <label for="current-player-and-frame" class="score-label"></label>
+            <input type="number" min="0" max="10" id="input-score">
+            <input type="submit" name="submit" id="submit-player-score" value="Submit Score">
+        </form>
+    </div>
     <main></main>
     <script src="./index.js"></script>
 </body>

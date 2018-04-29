@@ -10,3 +10,7 @@
 .frame-card h2 {
     font-size: 1rem;
 }
+
+.hidden {
+    display: none;
+}
