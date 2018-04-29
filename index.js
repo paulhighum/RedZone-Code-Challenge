@@ -88,6 +88,7 @@ function addScore(e){
   let currentPlayerScoreArr = scoreArray[currentPlayer - 1]
   if(currentFrame === 10){
     addScoreToHTMLTenthFrame(currentPlayerScoreArr, score)
+    calcTotalScoreTenthFrame(currentPlayerScoreArr)
   } else {
     addScoreToHTML(currentPlayerScoreArr, score)
     calcTotalScore(currentPlayerScoreArr)
@@ -184,6 +185,41 @@ function calcTotalScore(currentPlayerScoreArr){
       }
     } else if(currentPlayerScoreArr[i] === "/"){
       if(currentPlayerScoreArr.length === i + 1){
+        total += 10
+      } else if(currentPlayerScoreArr[i + 1] === "X"){
+        total += 20
+      } else {
+        total += 10 + currentPlayerScoreArr[i + 1]
+      }
+    } else if(currentPlayerScoreArr[i + 1] === "/"){
+      total += 0
+    } else {
+      total += currentPlayerScoreArr[i]
+    }
+    
+  }
+  console.log(total)
+}
+
+function calcTotalScoreTenthFrame(currentPlayerScoreArr){
+  let total = 0
+  for(var i = 0; i < currentPlayerScoreArr.length; i++){
+    if(currentPlayerScoreArr[i] === "X"){
+      if(currentPlayerScoreArr.length === i + 1 || currentPlayerScoreArr.length === i + 2 || currentPlayerScoreArr.length === i + 3){
+        total += 10
+      } else {
+        if(currentPlayerScoreArr[i + 1] === "X" && currentPlayerScoreArr[i + 2] === "X"){
+          total += 30
+        } else if(currentPlayerScoreArr[i + 1] === "X" && currentPlayerScoreArr[i + 2] != "X"){
+          total += 20 + Number(currentPlayerScoreArr[i + 2])
+        } else if(currentPlayerScoreArr[i + 2] === "/"){
+          total += 20
+        } else {
+          total += 10 + currentPlayerScoreArr[i + 1] + currentPlayerScoreArr[i + 2]
+        }
+      }
+    } else if(currentPlayerScoreArr[i] === "/"){
+      if(currentPlayerScoreArr.length === i + 1 || currentPlayerScoreArr.length === i + 2){
         total += 10
       } else if(currentPlayerScoreArr[i + 1] === "X"){
         total += 20
