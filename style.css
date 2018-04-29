@@ -2,8 +2,13 @@
     display: flex;
 }
 
+.total-score-div {
+    padding: 1vmin;
+    font-size: 1.1rem;
+}
+
 .frame-card {
-    padding: 2vmin;
+    padding: 1vmin;
     height:10vh;
 }
 
