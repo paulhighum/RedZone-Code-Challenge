@@ -16,6 +16,7 @@ function saveNumOfPlayers(e){
   document.querySelector(".score-form").setAttribute("class", "score-form")
   document.querySelector(".score-form").addEventListener("submit", addScore)
   document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
+  document.querySelector("#player-num-form").setAttribute("class", "hidden")
 }
 
 function createPlayerCards(num){
@@ -309,4 +310,5 @@ function determineRealCurrentPlayer(rcp){
 function newGame(){
   document.querySelector("main").innerHTML = ""
   document.querySelector(".score-form").setAttribute("class", "hidden score-form")
+  document.querySelector("#player-num-form").setAttribute("class", "visible")
 }
