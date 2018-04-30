@@ -27,3 +27,8 @@
 .frame-score-1 {
     padding-right: 2vmin;
 }
+
+#game-over {
+    color: red;
+    font-size: 1.5rem;
+}

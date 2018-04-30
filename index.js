@@ -1,7 +1,6 @@
 document.querySelector("#player-num-form").addEventListener("submit", saveNumOfPlayers)
 document.querySelector(".new-game").addEventListener("click", newGame)
 let numOfPlayers = 0
-let totalFrames = 0
 let currentFrame = 1
 let currentPlayer = 1
 let currentBowl = 1
@@ -11,7 +10,6 @@ function saveNumOfPlayers(e){
   e.preventDefault()
   document.querySelector("main").innerHTML = ""
   numOfPlayers = e.target.childNodes[3].value
-  totalFrames = numOfPlayers * 10
   createPlayerCards(numOfPlayers)
   document.querySelector(".score-form").setAttribute("class", "score-form")
   document.querySelector(".score-form").addEventListener("submit", addScore)
@@ -105,6 +103,7 @@ function addScore(e){
     let realCurrentPlayer = determineRealCurrentPlayer()
     calcTotalScore(scoreArray[realCurrentPlayer - 1], realCurrentPlayer)
   }
+  endGame()
 }
 
 function addScoreToHTML(array, score){
@@ -311,4 +310,11 @@ function newGame(){
   document.querySelector("main").innerHTML = ""
   document.querySelector(".score-form").setAttribute("class", "hidden score-form")
   document.querySelector("#player-num-form").setAttribute("class", "visible")
+  document.querySelector("#game-over").setAttribute("class", "hidden")
+}
+
+function endGame(){
+  if(currentFrame === 11){
+    document.querySelector("#game-over").setAttribute("class", "visible")
+  }
 }
