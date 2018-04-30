@@ -7,10 +7,11 @@ body {
 
 .player-num-form {
     display: flex;
-    font-size: 2rem;
+    font-size: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 8vh;
 }
 
 .player-num-form label {
@@ -19,7 +20,7 @@ body {
 }
 
 #player-num {
-    font-size: 1rem;
+    font-size: 1.5rem;
     border: 1px solid black;
     border-radius: 5px;
     height: 4vh;
@@ -28,8 +29,8 @@ body {
 }
 
 #submit-player-num {
-    font-size: 1.5rem;
-    height: 5vh;
+    font-size: 2rem;
+    height: 6vh;
     border: 1px solid black;
     border-radius: 5px;
     background-color: rgba(64, 64, 64, .7);
