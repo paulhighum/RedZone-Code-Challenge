@@ -1,4 +1,5 @@
 document.querySelector("#player-num-form").addEventListener("submit", saveNumOfPlayers)
+document.querySelector(".new-game").addEventListener("click", newGame)
 let numOfPlayers = 0
 let totalFrames = 0
 let currentFrame = 1
@@ -103,7 +104,6 @@ function addScore(e){
     let realCurrentPlayer = determineRealCurrentPlayer()
     calcTotalScore(scoreArray[realCurrentPlayer - 1], realCurrentPlayer)
   }
-  console.log(scoreArray)
 }
 
 function addScoreToHTML(array, score){
@@ -211,8 +211,7 @@ function calcTotalScore(array, person){
       total += 0
     } else {
       total += array[i]
-    }
-    
+    }  
   }
   document.querySelector(`.player${person}-total-score`).innerText = total
   
@@ -247,8 +246,7 @@ function calcTotalScorePenultimate(array, person){
       total += 0
     } else {
       total += array[i]
-    }
-    
+    } 
   }
   document.querySelector(`.player${person}-total-score`).innerText = total
 }
@@ -282,8 +280,7 @@ function calcTotalScoreEnd(array, person){
       total += 0
     } else {
       total += array[i]
-    }
-    
+    } 
   }
   document.querySelector(`.player${person}-total-score`).innerText = total
 }
@@ -307,4 +304,9 @@ function determineRealCurrentPlayer(rcp){
     rcp = currentPlayer - 1
   }
   return rcp
+}
+
+function newGame(){
+  document.querySelector("main").innerHTML = ""
+  document.querySelector(".score-form").setAttribute("class", "hidden score-form")
 }
