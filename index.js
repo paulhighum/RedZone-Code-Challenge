@@ -28,7 +28,7 @@ function createPlayerCards(num){
     let totalScoreDiv = document.createElement("div")
     totalScoreDiv.setAttribute("class", "total-score-div")
     let totalScore = document.createElement("p")
-    totalScore.setAttribute("class", "total-score")
+    totalScore.setAttribute("class", `player${i + 1}-total-score`)
     let totalScoreLabel = document.createElement("h3")
     totalScoreLabel.setAttribute("class", "total-score-label")
     totalScoreLabel.innerText = "Total Score"
@@ -86,154 +86,206 @@ function addScore(e){
   e.preventDefault()
   let score = Number(e.target.childNodes[3].value)
   let currentPlayerScoreArr = scoreArray[currentPlayer - 1]
-  if(currentFrame === 10){
+  if(currentFrame === 10 && currentBowl === 3){
     addScoreToHTMLTenthFrame(currentPlayerScoreArr, score)
-    calcTotalScoreTenthFrame(currentPlayerScoreArr)
+    let realCurrentPlayer = determineRealCurrentPlayer()
+    calcTotalScoreEnd(scoreArray[realCurrentPlayer - 1], realCurrentPlayer)
+  } else if(currentFrame === 10 && currentBowl === 2){
+    addScoreToHTMLTenthFrame(currentPlayerScoreArr, score)
+    let realCurrentPlayer = determineRealCurrentPlayer()
+    calcTotalScorePenultimate(scoreArray[realCurrentPlayer - 1], realCurrentPlayer)
+  } else if(currentFrame === 10){
+    addScoreToHTMLTenthFrame(currentPlayerScoreArr, score)
+    let realCurrentPlayer = determineRealCurrentPlayer()
+    calcTotalScore(scoreArray[realCurrentPlayer - 1], realCurrentPlayer)
   } else {
     addScoreToHTML(currentPlayerScoreArr, score)
-    calcTotalScore(currentPlayerScoreArr)
+    let realCurrentPlayer = determineRealCurrentPlayer()
+    calcTotalScore(scoreArray[realCurrentPlayer - 1], realCurrentPlayer)
   }
-  console.log(currentPlayerScoreArr)
+  console.log(scoreArray)
 }
 
-function addScoreToHTML(currentPlayerScoreArr, score){
+function addScoreToHTML(array, score){
   if(score === 10){
     currentBowl = 1
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[0].innerText = "X"
-    currentPlayerScoreArr.push("X")
+    array.push("X")
     setCurrentPlayer()
   } else if(currentBowl === 1){
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[0].innerText = score
     document.querySelector("#input-score").setAttribute("max", 10 - score)
-    currentPlayerScoreArr.push(score)
+    array.push(score)
     currentBowl = 2
     document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
-  } else if(currentBowl === 2 && currentPlayerScoreArr[currentPlayerScoreArr.length - 1] + score === 10){
+  } else if(currentBowl === 2 && array[array.length - 1] + score === 10){
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[1].innerText = "/"
-    currentPlayerScoreArr.push("/")
+    array.push("/")
     currentBowl = 1
     document.querySelector("#input-score").setAttribute("max", 10)
     setCurrentPlayer()
   } else {
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[1].innerText = score
-    currentPlayerScoreArr.push(score)
+    array.push(score)
     currentBowl = 1
     document.querySelector("#input-score").setAttribute("max", 10)
     setCurrentPlayer()
   }
 }
 
-function addScoreToHTMLTenthFrame(currentPlayerScoreArr, score){
+function addScoreToHTMLTenthFrame(array, score){
   if(currentBowl === 1 && score === 10){
     currentBowl = 2  
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[0].innerText = "X"
-    currentPlayerScoreArr.push("X")
+    array.push("X")
     document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
   } else if(currentBowl === 2 && score === 10){
     currentBowl = 3
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[1].innerText = "X"
-    currentPlayerScoreArr.push("X")
+    array.push("X")
     document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
   } else if(currentBowl === 3 && score === 10){
     currentBowl = 1
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[2].innerText = "X"
-    currentPlayerScoreArr.push("X")
+    array.push("X")
     setCurrentPlayer()
-  } else if(currentBowl === 2 && currentPlayerScoreArr[currentPlayerScoreArr.length - 1] + score === 10){
+  } else if(currentBowl === 2 && array[array.length - 1] + score === 10){
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[1].innerText = "/"
-    currentPlayerScoreArr.push("/")
+    array.push("/")
     currentBowl = 3
     document.querySelector("#input-score").setAttribute("max", 10)
+    document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
+  } else if(currentBowl === 2 && array[array.length - 1] === "X"){
+    document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[1].innerText = score
+    document.querySelector("#input-score").setAttribute("max", 10 - score)
+    array.push(score)
+    currentBowl = 3
     document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
   } else if(currentBowl === 1){
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[0].innerText = score
     document.querySelector("#input-score").setAttribute("max", 10 - score)
-    currentPlayerScoreArr.push(score)
+    array.push(score)
     currentBowl = 2
     document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
   } else {
     document.querySelector(`.player${currentPlayer}frame${currentFrame}`).childNodes[1].childNodes[currentBowl - 1].innerText = score
-    currentPlayerScoreArr.push(score)
+    array.push(score)
     currentBowl = 1
     document.querySelector("#input-score").setAttribute("max", 10)
     setCurrentPlayer()
   }
 }
 
-function calcTotalScore(currentPlayerScoreArr){
+function calcTotalScore(array, person){
   let total = 0
-  for(var i = 0; i < currentPlayerScoreArr.length; i++){
-    if(currentPlayerScoreArr[i] === "X"){
-      if(currentPlayerScoreArr.length === i + 1){
+  for(var i = 0; i < array.length; i++){
+    if(array[i] === "X"){
+      if(array.length === i + 1){
         total += 10
-      } else if(currentPlayerScoreArr.length === i + 2){
-        if(currentPlayerScoreArr[i + 1] === "X"){
+      } else if(array.length === i + 2){
+        if(array[i + 1] === "X"){
           total += 20
         } else {
-          total += 10 + Number(currentPlayerScoreArr[i + 1])
+          total += 10 + Number(array[i + 1])
         }
-      } else if(currentPlayerScoreArr.length >= i + 3){
-        if(currentPlayerScoreArr[i + 1] === "X" && currentPlayerScoreArr[i + 2] === "X"){
+      } else {
+        if(array[i + 1] === "X" && array[i + 2] === "X"){
           total += 30
-        } else if(currentPlayerScoreArr[i + 1] === "X" && currentPlayerScoreArr[i + 2] != "X"){
-          total += 20 + Number(currentPlayerScoreArr[i + 2])
-        } else if(currentPlayerScoreArr[i + 2] === "/"){
+        } else if(array[i + 1] === "X" && array[i + 2] != "X"){
+          total += 20 + Number(array[i + 2])
+        } else if(array[i + 2] === "/"){
           total += 20
         } else {
-          total += 10 + currentPlayerScoreArr[i + 1] + currentPlayerScoreArr[i + 2]
+          total += 10 + array[i + 1] + array[i + 2]
         }
       }
-    } else if(currentPlayerScoreArr[i] === "/"){
-      if(currentPlayerScoreArr.length === i + 1){
+    } else if(array[i] === "/"){
+      if(array.length === i + 1){
         total += 10
-      } else if(currentPlayerScoreArr[i + 1] === "X"){
+      } else if(array[i + 1] === "X"){
         total += 20
       } else {
-        total += 10 + currentPlayerScoreArr[i + 1]
+        total += 10 + array[i + 1]
       }
-    } else if(currentPlayerScoreArr[i + 1] === "/"){
+    } else if(array[i + 1] === "/"){
       total += 0
     } else {
-      total += currentPlayerScoreArr[i]
+      total += array[i]
     }
     
   }
-  console.log(total)
+  document.querySelector(`.player${person}-total-score`).innerText = total
+  
 }
 
-function calcTotalScoreTenthFrame(currentPlayerScoreArr){
+function calcTotalScorePenultimate(array, person){
   let total = 0
-  for(var i = 0; i < currentPlayerScoreArr.length; i++){
-    if(currentPlayerScoreArr[i] === "X"){
-      if(currentPlayerScoreArr.length === i + 1 || currentPlayerScoreArr.length === i + 2 || currentPlayerScoreArr.length === i + 3){
+  for(var i = 0; i < array.length; i++){
+    if(array[i] === "X"){
+      if(array.length === i + 1 || array.length === i + 2){
         total += 10
       } else {
-        if(currentPlayerScoreArr[i + 1] === "X" && currentPlayerScoreArr[i + 2] === "X"){
+        if(array[i + 1] === "X" && array[i + 2] === "X"){
           total += 30
-        } else if(currentPlayerScoreArr[i + 1] === "X" && currentPlayerScoreArr[i + 2] != "X"){
-          total += 20 + Number(currentPlayerScoreArr[i + 2])
-        } else if(currentPlayerScoreArr[i + 2] === "/"){
+        } else if(array[i + 1] === "X" && array[i + 2] != "X"){
+          total += 20 + Number(array[i + 2])
+        } else if(array[i + 2] === "/"){
           total += 20
         } else {
-          total += 10 + currentPlayerScoreArr[i + 1] + currentPlayerScoreArr[i + 2]
+          total += 10 + array[i + 1] + array[i + 2]
         }
       }
-    } else if(currentPlayerScoreArr[i] === "/"){
-      if(currentPlayerScoreArr.length === i + 1 || currentPlayerScoreArr.length === i + 2){
+    } else if(array[i] === "/"){
+      if(array.length === i + 1 ){
         total += 10
-      } else if(currentPlayerScoreArr[i + 1] === "X"){
+      } else if(array[i + 1] === "X"){
         total += 20
       } else {
-        total += 10 + currentPlayerScoreArr[i + 1]
+        total += 10 + array[i + 1]
       }
-    } else if(currentPlayerScoreArr[i + 1] === "/"){
+    } else if(array[i + 1] === "/"){
       total += 0
     } else {
-      total += currentPlayerScoreArr[i]
+      total += array[i]
     }
     
   }
-  console.log(total)
+  document.querySelector(`.player${person}-total-score`).innerText = total
+}
+
+function calcTotalScoreEnd(array, person){
+  let total = 0
+  for(var i = 0; i < array.length; i++){
+    if(array[i] === "X"){
+      if(array.length === i + 1 || array.length === i + 2 || array.length === i + 3){
+        total += 10
+      } else {
+        if(array[i + 1] === "X" && array[i + 2] === "X"){
+          total += 30
+        } else if(array[i + 1] === "X" && array[i + 2] != "X"){
+          total += 20 + Number(array[i + 2])
+        } else if(array[i + 2] === "/"){
+          total += 20
+        } else {
+          total += 10 + array[i + 1] + array[i + 2]
+        }
+      }
+    } else if(array[i] === "/"){
+      if(array.length === i + 1 || array.length === i + 2){
+        total += 10
+      } else if(array[i + 1] === "X"){
+        total += 20
+      } else {
+        total += 10 + array[i + 1]
+      }
+    } else if(array[i + 1] === "/"){
+      total += 0
+    } else {
+      total += array[i]
+    }
+    
+  }
+  document.querySelector(`.player${person}-total-score`).innerText = total
 }
 
 function setCurrentPlayer(){
@@ -244,4 +296,15 @@ function setCurrentPlayer(){
     currentFrame++
   }
   document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
+}
+
+function determineRealCurrentPlayer(rcp){
+  if(currentBowl === 2 || currentBowl === 3){
+    rcp = currentPlayer
+  } else if(currentPlayer === 1){
+    rcp = Number(numOfPlayers)
+  } else {
+    rcp = currentPlayer - 1
+  }
+  return rcp
 }
