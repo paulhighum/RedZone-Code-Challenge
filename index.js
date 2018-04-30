@@ -24,11 +24,11 @@ function createPlayerCards(num){
     playerCard.setAttribute("id", `player${i + 1}`)
     playerCard.setAttribute("class", "player-card")
     let player = document.createElement("h1")
-    player.innerText = `Player ${i + 1}`
+    player.innerText = `Player ${i + 1}:`
     let totalScoreDiv = document.createElement("div")
     totalScoreDiv.setAttribute("class", "total-score-div")
     let totalScore = document.createElement("p")
-    totalScore.setAttribute("class", `player${i + 1}-total-score`)
+    totalScore.setAttribute("class", `player${i + 1}-total-score total-score`)
     let totalScoreLabel = document.createElement("h3")
     totalScoreLabel.setAttribute("class", "total-score-label")
     totalScoreLabel.innerText = "Total Score"
@@ -316,6 +316,7 @@ function newGame(){
   currentPlayer = 1
   currentBowl = 1
   scoreArray = []
+  document.querySelector("#input-score").setAttribute("max", 10)
 }
 
 function endGame(){

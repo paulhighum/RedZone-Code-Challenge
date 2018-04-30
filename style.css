@@ -1,19 +1,111 @@
+body {
+    background-image: url("./todd-diemer-558889-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white; 
+}
+
+.score-form {
+    display: flex;
+    font-size: 2rem;
+}
+
+.new-game {
+    font-size: 1.5rem;
+    height: 5vh;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(64, 64, 64, .7);
+    color: white;
+    margin-left: 9vw;
+}
+
+.new-game:hover {
+    border-color: #12E800;
+    color: #12E800;
+    cursor: pointer;
+}
+
+#score-input-form {
+    margin-left: 10vw;
+    display: flex;
+    align-items: center;
+}
+
+.score-label {
+    align-self: flex-start;
+    padding-right: 1vmin;
+}
+
+#input-score {
+    font-size: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 4vh;
+    margin-right: 1vmin;
+    padding-left: 1vmin;
+}
+
+#submit-player-score {
+    font-size: 1.5rem;
+    height: 5vh;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(64, 64, 64, .7);
+    color: white;
+}
+
+#submit-player-score:hover {
+    border-color: #12E800;
+    color: #12E800;
+    cursor: pointer;
+}
+
 .player-card {
     display: flex;
+    margin: 1vh 0;
+    align-items: center;
+}
+
+.player-card h1 {
+    padding-right: 1vmin;
+    align-self: flex-start;
+    margin: 1vmin 0;
 }
 
 .total-score-div {
     padding: 1vmin;
     font-size: 1.1rem;
+    height: 12vh;
+    background-color: rgba(64, 64, 64, .7);
+    margin-right: 1vmin;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.total-score-div h3 {
+    margin: 0;
+}
+
+.total-score {
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 2vh 0;
 }
 
 .frame-card {
     padding: 1vmin;
     height:10vh;
+    background-color: rgba(64, 64, 64, .7);
+    margin-right: 1vmin;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .frame-card h2 {
     font-size: 1rem;
+    margin: 0;
 }
 
 .hidden {
