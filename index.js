@@ -1,4 +1,4 @@
-document.querySelector("#player-num-form").addEventListener("submit", saveNumOfPlayers)
+document.querySelector(".player-num-form").addEventListener("submit", saveNumOfPlayers)
 document.querySelector(".new-game").addEventListener("click", newGame)
 let numOfPlayers = 0
 let currentFrame = 1
@@ -14,7 +14,7 @@ function saveNumOfPlayers(e){
   document.querySelector(".score-form").setAttribute("class", "score-form")
   document.querySelector(".score-form").addEventListener("submit", addScore)
   document.querySelector(".score-label").innerText = `Player ${currentPlayer}, Frame ${currentFrame}, Bowl ${currentBowl} Score:`
-  document.querySelector("#player-num-form").setAttribute("class", "hidden")
+  document.querySelector(".player-num-form").setAttribute("class", "player-num-form hidden")
 }
 
 function createPlayerCards(num){
@@ -309,7 +309,7 @@ function determineRealCurrentPlayer(rcp){
 function newGame(){
   document.querySelector("main").innerHTML = ""
   document.querySelector(".score-form").setAttribute("class", "hidden score-form")
-  document.querySelector("#player-num-form").setAttribute("class", "visible")
+  document.querySelector(".player-num-form").setAttribute("class", "player-num-form")
   document.querySelector("#game-over").setAttribute("class", "hidden")
   scoreArray = []
   currentFrame = 1

@@ -5,6 +5,43 @@ body {
     color: white; 
 }
 
+.player-num-form {
+    display: flex;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-num-form label {
+    padding-right: 1vmin;
+    align-self: flex-start;
+}
+
+#player-num {
+    font-size: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 4vh;
+    margin-right: 1vmin;
+    padding-left: 1vmin;
+}
+
+#submit-player-num {
+    font-size: 1.5rem;
+    height: 5vh;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(64, 64, 64, .7);
+    color: white;
+}
+
+#submit-player-num:hover {
+    border-color: #12E800;
+    color: #12E800;
+    cursor: pointer;
+}
+
 .score-form {
     display: flex;
     font-size: 2rem;
