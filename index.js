@@ -311,15 +311,15 @@ function newGame(){
   document.querySelector(".score-form").setAttribute("class", "hidden score-form")
   document.querySelector("#player-num-form").setAttribute("class", "visible")
   document.querySelector("#game-over").setAttribute("class", "hidden")
+  scoreArray = []
+  currentFrame = 1
+  currentPlayer = 1
+  currentBowl = 1
+  scoreArray = []
 }
 
 function endGame(){
   if(currentFrame === 11){
     document.querySelector("#game-over").setAttribute("class", "visible")
-    scoreArray = []
-    currentFrame = 1
-    currentPlayer = 1
-    currentBowl = 1
-    scoreArray = []
   }
 }
