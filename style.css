@@ -159,5 +159,9 @@ body {
 
 #game-over {
     color: red;
-    font-size: 1.5rem;
+    font-size: 8rem;
+    position: absolute;
+    left: 23vw;
+    top:15vh;
+    z-index: 2;
 }
