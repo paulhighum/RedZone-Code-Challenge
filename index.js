@@ -316,5 +316,10 @@ function newGame(){
 function endGame(){
   if(currentFrame === 11){
     document.querySelector("#game-over").setAttribute("class", "visible")
+    scoreArray = []
+    currentFrame = 1
+    currentPlayer = 1
+    currentBowl = 1
+    scoreArray = []
   }
 }
