@@ -1,5 +1,7 @@
 # RedZone-Code-Challenge
 
+<img width="1428" alt="screen shot 2018-04-30 at 10 13 00 am" src="https://user-images.githubusercontent.com/26422138/39437842-50caa78e-4c5f-11e8-9e8e-edfa315a134b.png">
+
 ## App Description
 This simple web app keeps track of bowling scores for parties of up to six.
 
